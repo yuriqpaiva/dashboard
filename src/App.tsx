@@ -2,9 +2,11 @@ import * as React from 'react';
 
 import { ThemeProvider } from 'styled-components';
 
+import MostrarMais from './components/MostrarMais';
 import Status from './components/Status';
 import Table from './components/Table';
 import { countStatusChamada } from './functions/countStatusChamadas';
+import { filterChamadas } from './functions/filterChamadas';
 import { getChamadasFromAPI } from './functions/getChamadas';
 import Chamada from './interfaces/Chamada';
 import ChamadaCounter from './interfaces/ChamadaCounter';
@@ -20,11 +22,20 @@ const App: React.FC = () => {
     emSelecaoDeFluxo: 0,
   });
 
+  const [mostrarMais, setMostrarMais] = React.useState(true);
+
+  const handleMostrarMais = () => {
+    mostrarMais ? setMostrarMais(false) : setMostrarMais(true);
+  };
+
   React.useEffect(() => {
     const updateChamadas = () => {
       getChamadasFromAPI().then((newChamadas) => {
         setChamadas(newChamadas);
         setChamadasCounter(countStatusChamada(newChamadas));
+        if (newChamadas.length < 5) {
+          handleMostrarMais();
+        }
       });
     };
 
@@ -32,6 +43,7 @@ const App: React.FC = () => {
     setInterval(() => {
       updateChamadas();
     }, 60000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -40,7 +52,12 @@ const App: React.FC = () => {
       <Home>
         <h1 className="title">Bem vindo ao Dashboard,</h1>
         <p>Aqui você obtém acesso às principais informações da API</p>
-        <Table chamadas={chamadas} />
+        {mostrarMais ? (
+          <Table chamadas={filterChamadas(chamadas)} />
+        ) : (
+          <Table chamadas={chamadas} />
+        )}
+        {mostrarMais && <MostrarMais onClick={handleMostrarMais} />}
         <Status chamadasCounter={chamadasCounter} />
       </Home>
     </ThemeProvider>

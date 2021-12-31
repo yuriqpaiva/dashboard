@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100vh;
   margin: 16px;
   padding-top: ${(props) => props.theme.distance.small};
   padding-bottom: ${(props) => props.theme.distance.small};
@@ -32,11 +34,31 @@ export default styled.div`
     }
   }
 
+  .mostrarMais {
+    display: flex;
+    justify-content: center;
+
+    background-color: ${(props) => props.theme.palette.blue};
+    color: ${(props) => props.theme.palette.white};
+    border: white;
+    cursor: pointer;
+    border-radius: ${(props) => props.theme.borderRadius};
+    width: 120px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: ${(props) => props.theme.distance.small};
+  }
+
   .status {
     margin-top: ${(props) => props.theme.distance.large};
 
     .statusTitle {
       color: ${(props) => props.theme.palette.green};
+    }
+
+    .statusNumber {
+      font-weight: bold;
     }
   }
 `;
