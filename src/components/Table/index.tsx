@@ -1,23 +1,13 @@
 import * as React from 'react';
 
-import { getChamadasFromAPI } from '../../functions/getChamadas';
 import Chamada from '../../interfaces/Chamada';
 import TableData from './components/TableData';
 
-const Table: React.FC = () => {
-  const [chamadas, setChamadas] = React.useState<Chamada[]>([]);
+interface TableProps {
+  chamadas: Chamada[];
+}
 
-  React.useEffect(() => {
-    const updateChamadas = () => {
-      getChamadasFromAPI().then((newChamadas) => setChamadas(newChamadas));
-    };
-
-    updateChamadas();
-    setInterval(() => {
-      updateChamadas();
-    }, 60000);
-  }, []);
-
+const Table: React.FC<TableProps> = ({ chamadas }) => {
   return (
     <table className="table">
       <thead>

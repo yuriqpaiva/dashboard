@@ -31,4 +31,12 @@ export default styled.div`
       color: ${(props) => props.theme.palette.white};
     }
   }
+
+  .status {
+    margin-top: ${(props) => props.theme.distance.large};
+
+    .statusTitle {
+      color: ${(props) => props.theme.palette.green};
+    }
+  }
 `;
