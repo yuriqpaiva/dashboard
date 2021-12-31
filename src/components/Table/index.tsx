@@ -1,25 +1,41 @@
 import * as React from 'react';
 
-import mocks from '../../mocks';
+import { getChamadasFromAPI } from '../../functions/getChamadas';
+import Chamada from '../../interfaces/Chamada';
 import TableData from './components/TableData';
 
 const Table: React.FC = () => {
+  const [chamadas, setChamadas] = React.useState<Chamada[]>([]);
+
+  React.useEffect(() => {
+    const updateChamadas = () => {
+      getChamadasFromAPI().then((newChamadas) => setChamadas(newChamadas));
+    };
+
+    updateChamadas();
+    setInterval(() => {
+      updateChamadas();
+    }, 60000);
+  }, []);
+
   return (
     <table className="table">
-      <tr>
-        <TableData tableHead>ID</TableData>
-        <TableData tableHead>Origem</TableData>
-        <TableData tableHead>Destino</TableData>
-        <TableData tableHead>Estado</TableData>
-      </tr>
+      <thead>
+        <tr>
+          <TableData tableHead>ID</TableData>
+          <TableData tableHead>Origem</TableData>
+          <TableData tableHead>Destino</TableData>
+          <TableData tableHead>Estado</TableData>
+        </tr>
+      </thead>
       <tbody>
-        {mocks.map((data) => {
+        {chamadas.map((chamada) => {
           return (
-            <tr key={data.id}>
-              <TableData>{data.id}</TableData>
-              <TableData>{data.origem}</TableData>
-              <TableData>{data.destino}</TableData>
-              <TableData>{data.estado}</TableData>
+            <tr key={chamada.id}>
+              <TableData>{chamada.id}</TableData>
+              <TableData>{chamada.origem}</TableData>
+              <TableData>{chamada.destino}</TableData>
+              <TableData>{chamada.estado}</TableData>
             </tr>
           );
         })}
