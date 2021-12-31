@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import ChamadaCounter from '../../interfaces/ChamadaCounter';
+import { eyeIcon } from '../icons';
+import StatusItem from './components/StatusItem';
 
 interface StatusProps {
   chamadasCounter: ChamadaCounter;
@@ -9,19 +11,24 @@ interface StatusProps {
 const Status: React.FC<StatusProps> = ({ chamadasCounter }) => {
   return (
     <div className="status">
-      <h2 className="statusTitle">Status das Chamadas</h2>
-      <p>
-        Em Curso:{' '}
-        <span className="statusNumber">{chamadasCounter.emCurso}</span>
-      </p>
-      <p>
-        Em seleção de Fluxo:{' '}
-        <span className="statusNumber">{chamadasCounter.emSelecaoDeFluxo}</span>
-      </p>
-      <p>
-        Chamando:{' '}
-        <span className="statusNumber">{chamadasCounter.chamando}</span>
-      </p>
+      <h2 className="statusTitle">
+        <span className="statusIcon">{eyeIcon}</span>
+        Status das Chamadas
+      </h2>
+      <div className="statusItems">
+        <StatusItem counter={chamadasCounter.emCurso} classColor="redItem">
+          Em Curso
+        </StatusItem>
+        <StatusItem
+          counter={chamadasCounter.emSelecaoDeFluxo}
+          classColor="blueItem"
+        >
+          Em seleção de Fluxo
+        </StatusItem>
+        <StatusItem counter={chamadasCounter.chamando} classColor="greenItem">
+          Chamando
+        </StatusItem>
+      </div>
     </div>
   );
 };

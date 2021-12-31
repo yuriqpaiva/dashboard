@@ -2,9 +2,12 @@ import * as React from 'react';
 
 import { ThemeProvider } from 'styled-components';
 
+import Counter from './components/Counter';
+import { homeIcon } from './components/icons';
 import MostrarMais from './components/MostrarMais';
 import Status from './components/Status';
 import Table from './components/Table';
+import { counterInSecondsInterval, setCounterToMS } from './data/counter';
 import { countStatusChamada } from './functions/countStatusChamadas';
 import { filterChamadas } from './functions/filterChamadas';
 import { getChamadasFromAPI } from './functions/getChamadas';
@@ -22,6 +25,14 @@ const App: React.FC = () => {
     emSelecaoDeFluxo: 0,
   });
 
+  const [counterNumber, setCounterNumber] = React.useState(
+    counterInSecondsInterval
+  );
+
+  const resetCounter = () => {
+    setCounterNumber(counterInSecondsInterval);
+  };
+
   const [mostrarMais, setMostrarMais] = React.useState(true);
 
   const handleMostrarMais = () => {
@@ -33,7 +44,7 @@ const App: React.FC = () => {
       getChamadasFromAPI().then((newChamadas) => {
         setChamadas(newChamadas);
         setChamadasCounter(countStatusChamada(newChamadas));
-        if (newChamadas.length < 5) {
+        if (newChamadas.length <= 5) {
           handleMostrarMais();
         }
       });
@@ -42,7 +53,8 @@ const App: React.FC = () => {
     updateChamadas();
     setInterval(() => {
       updateChamadas();
-    }, 60000);
+      resetCounter();
+    }, setCounterToMS(counterInSecondsInterval));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -50,8 +62,15 @@ const App: React.FC = () => {
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <Home>
-        <h1 className="title">Bem vindo ao Dashboard,</h1>
+        <h1 className="title">
+          <span className="titleIcon">{homeIcon}</span>Bem vindo(a) ao
+          Dashboard,
+        </h1>
         <p>Aqui você obtém acesso às principais informações da API</p>
+        <Counter
+          counterNumber={counterNumber}
+          setCounterNumber={setCounterNumber}
+        />
         {mostrarMais ? (
           <Table chamadas={filterChamadas(chamadas)} />
         ) : (

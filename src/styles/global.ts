@@ -6,6 +6,8 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: ${(props) => props.theme.palette.white};
     font-family: 'Roboto', Sans-Serif;
+    width: 100%;
+    height: 100%;
   }
 `;
 

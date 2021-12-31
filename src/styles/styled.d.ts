@@ -11,11 +11,16 @@ declare module 'styled-components' {
       white: string;
       blue: string;
       green: string;
+      yellow: string;
+      red: string;
+      gray: string;
+      softGray: string;
     };
     distance: {
       small: string;
       medium: string;
       large: string;
+      xl: string;
     };
   }
 }
