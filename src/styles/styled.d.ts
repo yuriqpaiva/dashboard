@@ -9,6 +9,12 @@ declare module 'styled-components' {
     palette: {
       black: string;
       white: string;
+      babyBlue: string;
+    };
+    margin: {
+      small: string;
+      medium: string;
+      large: string;
     };
   }
 }
