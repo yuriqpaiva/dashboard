@@ -19,6 +19,7 @@ export default styled.div`
     background-color: ${(props) => props.theme.palette.blue};
     color: ${(props) => props.theme.palette.white};
     border-radius: ${(props) => props.theme.borderRadius};
+    box-shadow: ${(props) => props.theme.shadow};
     padding: 10px;
     .titleIcon {
       width: 36px;
@@ -73,9 +74,9 @@ export default styled.div`
     border: white;
     cursor: pointer;
     border-radius: ${(props) => props.theme.borderRadius};
-    width: 120px;
+    width: 150px;
     padding: 12px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     margin-top: ${(props) => props.theme.distance.small};
     border: 2px solid ${(props) => props.theme.palette.blue};
@@ -93,6 +94,8 @@ export default styled.div`
       background-color: ${(props) => props.theme.palette.green};
       color: ${(props) => props.theme.palette.white};
       padding: 10px;
+      border-radius: ${(props) => props.theme.borderRadius};
+      box-shadow: ${(props) => props.theme.shadow};
     }
     .statusIcon {
       display: flex;

@@ -31,7 +31,9 @@ const Table: React.FC<TableProps> = ({ chamadas }) => {
               <TableData>{chamada.destino}</TableData>
               <TableData>{chamada.estado}</TableData>
               <TableData>
-                <span className="editIcon">{editIcon}</span>
+                <span className="editIcon" title="Editar Estado">
+                  {editIcon}
+                </span>
               </TableData>
             </tr>
           );
