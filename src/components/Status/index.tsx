@@ -8,7 +8,9 @@ interface StatusProps {
   chamadasCounter: ChamadaCounter;
 }
 
-const Status: React.FC<StatusProps> = ({ chamadasCounter }) => {
+const Status: React.FC<StatusProps> = ({
+  chamadasCounter: { emCurso, emSelecaoDeFluxo, chamando },
+}) => {
   return (
     <div className="status">
       <h2 className="statusTitle">
@@ -16,16 +18,13 @@ const Status: React.FC<StatusProps> = ({ chamadasCounter }) => {
         Status das Chamadas
       </h2>
       <div className="statusItems">
-        <StatusItem counter={chamadasCounter.emCurso} classColor="redItem">
+        <StatusItem counter={emCurso} classColor="redItem">
           Em Curso
         </StatusItem>
-        <StatusItem
-          counter={chamadasCounter.emSelecaoDeFluxo}
-          classColor="blueItem"
-        >
+        <StatusItem counter={emSelecaoDeFluxo} classColor="blueItem">
           Em seleção de Fluxo
         </StatusItem>
-        <StatusItem counter={chamadasCounter.chamando} classColor="greenItem">
+        <StatusItem counter={chamando} classColor="greenItem">
           Chamando
         </StatusItem>
       </div>

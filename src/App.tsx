@@ -11,6 +11,7 @@ import { counterInSecondsInterval, setCounterToMS } from './data/counter';
 import { countStatusChamada } from './functions/countStatusChamadas';
 import { filterChamadas } from './functions/filterChamadas';
 import { getChamadasFromAPI } from './functions/getChamadas';
+import { useDialogStatusData } from './hooks/useDialogStatusData';
 import Chamada from './interfaces/Chamada';
 import ChamadaCounter from './interfaces/ChamadaCounter';
 import GlobalStyle from './styles/global';
@@ -58,6 +59,8 @@ const App: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const { showDialogStatusUpdate } = useDialogStatusData();
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
@@ -78,6 +81,7 @@ const App: React.FC = () => {
         )}
         {mostrarMais && <MostrarMais onClick={handleMostrarMais} />}
         <Status chamadasCounter={chamadasCounter} />
+        {showDialogStatusUpdate()}
       </Home>
     </ThemeProvider>
   );

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
+  position: relative;
   width: 100vh;
   margin: 16px;
   padding-top: ${(props) => props.theme.distance.small};
@@ -39,6 +40,19 @@ export default styled.div`
       padding: 16px;
     }
 
+    .tableText {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tableRow {
+      display: flex;
+      justify-content: center;
+    }
+
     .tableRowGray {
       background-color: ${(props) => props.theme.palette.softGray};
     }
@@ -53,15 +67,31 @@ export default styled.div`
       color: ${(props) => props.theme.palette.white};
     }
 
-    .editIcon {
+    .selectChamada {
+      width: 90%;
+      padding: 5px;
+      margin-top: 16px;
+    }
+
+    .iconContainer {
+      display: flex;
+      gap: ${(props) => props.theme.distance.small};
+    }
+
+    .icon {
       display: flex;
       width: 32px;
       height: 32px;
-      color: ${(props) => props.theme.palette.gray};
+      color: ${(props) => props.theme.palette.green};
       cursor: pointer;
-      :hover {
-        color: ${(props) => props.theme.palette.green};
-      }
+    }
+
+    .greenIcon {
+      color: ${(props) => props.theme.palette.green};
+    }
+
+    .redIcon {
+      color: ${(props) => props.theme.palette.red};
     }
   }
 
@@ -133,6 +163,29 @@ export default styled.div`
 
     .redItem {
       color: ${(props) => props.theme.palette.red};
+    }
+  }
+
+  .scaleItem {
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    transform: translateX(var(--tw-translate-x))
+      translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
+      skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
+      scaleY(var(--tw-scale-y));
+
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+
+    :hover {
+      --tw-scale-x: 1.25;
+      --tw-scale-y: 1.25;
     }
   }
 `;

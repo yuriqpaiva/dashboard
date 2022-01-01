@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
+import DialogStatusData from './context/DialogStatus';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DialogStatusData>
+      <App />
+    </DialogStatusData>
   </React.StrictMode>,
   document.getElementById('root')
 );
