@@ -7,7 +7,6 @@ import { homeIcon } from './components/icons';
 import MostrarMais from './components/MostrarMais';
 import Status from './components/Status';
 import Table from './components/Table';
-import { counterInSecondsInterval, setCounterToMS } from './data/counter';
 import { countStatusChamada } from './functions/countStatusChamadas';
 import { filterChamadas } from './functions/filterChamadas';
 import { getChamadasFromAPI } from './functions/getChamadas';
@@ -26,38 +25,25 @@ const App: React.FC = () => {
     emSelecaoDeFluxo: 0,
   });
 
-  const [counterNumber, setCounterNumber] = React.useState(
-    counterInSecondsInterval
-  );
-
-  const resetCounter = () => {
-    setCounterNumber(counterInSecondsInterval);
-  };
-
   const [mostrarMais, setMostrarMais] = React.useState(true);
 
-  const handleMostrarMais = () => {
+  const handleMostrarMais = React.useCallback(() => {
     mostrarMais ? setMostrarMais(false) : setMostrarMais(true);
-  };
+  }, [mostrarMais]);
+
+  const updateChamadas = React.useCallback(() => {
+    getChamadasFromAPI().then((newChamadas) => {
+      setChamadas(newChamadas);
+      setChamadasCounter(countStatusChamada(newChamadas));
+      if (newChamadas.length <= 5) {
+        handleMostrarMais();
+      }
+    });
+  }, [handleMostrarMais]);
 
   React.useEffect(() => {
-    const updateChamadas = () => {
-      getChamadasFromAPI().then((newChamadas) => {
-        setChamadas(newChamadas);
-        setChamadasCounter(countStatusChamada(newChamadas));
-        if (newChamadas.length <= 5) {
-          handleMostrarMais();
-        }
-      });
-    };
-
     updateChamadas();
-    setInterval(() => {
-      updateChamadas();
-      resetCounter();
-    }, setCounterToMS(counterInSecondsInterval));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [updateChamadas]);
 
   const { statusUpdate, showDialogStatusUpdate } = useDialogStatusData();
 
@@ -70,10 +56,7 @@ const App: React.FC = () => {
           Dashboard,
         </h1>
         <p>Aqui você obtém acesso às principais informações da API</p>
-        <Counter
-          counterNumber={counterNumber}
-          setCounterNumber={setCounterNumber}
-        />
+        <Counter updateChamadas={updateChamadas} />
         {mostrarMais ? (
           <Table chamadas={filterChamadas(chamadas)} />
         ) : (

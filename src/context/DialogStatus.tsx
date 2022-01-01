@@ -21,14 +21,15 @@ interface DialogStatusDataProps {
 
 const DialogStatusData: React.FC<DialogStatusDataProps> = ({ children }) => {
   const [statusUpdate, setStatusUpdate] = React.useState<number>(null);
-  const [clearTimeout, setClearTimeout] = React.useState(false);
+
+  let clearTimeout: boolean;
 
   function showDialogStatusUpdate() {
     if (!clearTimeout) {
-      setClearTimeout(true);
+      clearTimeout = true;
       setTimeout(() => {
         setStatusUpdate(null);
-        setClearTimeout(false);
+        clearTimeout = false;
       }, 5000);
     }
 

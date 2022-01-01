@@ -1,14 +1,20 @@
 import * as React from 'react';
 
+import { counterInSecondsInterval } from '../../data/counter';
+
 interface CounterProps {
-  counterNumber: number;
-  setCounterNumber: (counterNumber: number) => void;
+  updateChamadas: () => void;
 }
 
-const Counter: React.FC<CounterProps> = ({
-  counterNumber,
-  setCounterNumber,
-}) => {
+const Counter: React.FC<CounterProps> = ({ updateChamadas }) => {
+  const [counterNumber, setCounterNumber] = React.useState(
+    counterInSecondsInterval
+  );
+
+  const resetCounter = React.useCallback(() => {
+    setCounterNumber(counterInSecondsInterval);
+  }, []);
+
   const updateCounter = React.useCallback(() => {
     if (counterNumber >= 0) {
       setCounterNumber(counterNumber - 1);
@@ -18,9 +24,13 @@ const Counter: React.FC<CounterProps> = ({
   React.useEffect(() => {
     const interval = setInterval(() => {
       updateCounter();
+      if (counterNumber === 1) {
+        updateChamadas();
+        resetCounter();
+      }
     }, 1000);
     return () => clearInterval(interval);
-  }, [updateCounter]);
+  }, [counterNumber, resetCounter, updateChamadas, updateCounter]);
 
   return (
     <div className="counter">

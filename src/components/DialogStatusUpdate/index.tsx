@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react';
+import * as React from 'react';
 
 import { useDialogStatusData } from '../../hooks/useDialogStatusData';
 import Dialog from '../../styles/dialog';
 import { cancelIcon } from '../icons';
 
 interface DialogStatusUpdateProps {
-  children: ReactNode;
+  children: React.ReactNode;
   status: number;
 }
 
