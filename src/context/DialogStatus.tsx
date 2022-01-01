@@ -21,12 +21,29 @@ interface DialogStatusDataProps {
 
 const DialogStatusData: React.FC<DialogStatusDataProps> = ({ children }) => {
   const [statusUpdate, setStatusUpdate] = React.useState<number>(null);
+  const [clearTimeout, setClearTimeout] = React.useState(false);
 
   function showDialogStatusUpdate() {
+    if (!clearTimeout) {
+      setClearTimeout(true);
+      setTimeout(() => {
+        setStatusUpdate(null);
+        setClearTimeout(false);
+      }, 5000);
+    }
+
     if (statusUpdate === 200) {
-      return <DialogStatusUpdate />;
+      return (
+        <DialogStatusUpdate status={200}>
+          Operação concluída com sucesso
+        </DialogStatusUpdate>
+      );
     } else if (statusUpdate === 500) {
-      return <DialogStatusUpdate />;
+      return (
+        <DialogStatusUpdate status={500}>
+          Ocorreu uma falha ao executar esta operação
+        </DialogStatusUpdate>
+      );
     } else {
       return;
     }

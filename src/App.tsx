@@ -59,7 +59,7 @@ const App: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { showDialogStatusUpdate } = useDialogStatusData();
+  const { statusUpdate, showDialogStatusUpdate } = useDialogStatusData();
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -81,7 +81,7 @@ const App: React.FC = () => {
         )}
         {mostrarMais && <MostrarMais onClick={handleMostrarMais} />}
         <Status chamadasCounter={chamadasCounter} />
-        {showDialogStatusUpdate()}
+        {statusUpdate && showDialogStatusUpdate()}
       </Home>
     </ThemeProvider>
   );

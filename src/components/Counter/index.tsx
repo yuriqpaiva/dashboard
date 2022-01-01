@@ -23,8 +23,8 @@ const Counter: React.FC<CounterProps> = ({
   }, [updateCounter]);
 
   return (
-    <div>
-      <p>
+    <div className="counter">
+      <p className="counterText">
         Atualizando dados em <strong>{counterNumber}</strong> segundos
       </p>
     </div>

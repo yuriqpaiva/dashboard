@@ -29,6 +29,15 @@ export default styled.div`
     }
   }
 
+  .counter {
+    background-color: ${(props) => props.theme.palette.yellow};
+    padding: 4px;
+    border-radius: ${(props) => props.theme.borderRadius};
+    .counterText {
+      margin-left: 10px;
+    }
+  }
+
   .table {
     margin-top: ${(props) => props.theme.distance.large};
     width: 100%;
@@ -71,6 +80,7 @@ export default styled.div`
       width: 90%;
       padding: 5px;
       margin-top: 16px;
+      font-size: 15px;
     }
 
     .iconContainer {

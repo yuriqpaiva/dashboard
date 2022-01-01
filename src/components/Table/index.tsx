@@ -54,6 +54,7 @@ const Table: React.FC<TableProps> = ({ chamadas }) => {
                             (res) => setStatusUpdate(res.status)
                           );
                           setAllowEdit(false);
+                          chamada.estado = estado;
                         }}
                       >
                         {checkIcon}
