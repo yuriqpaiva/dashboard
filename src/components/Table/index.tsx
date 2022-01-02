@@ -1,18 +1,21 @@
 import * as React from 'react';
 
 import tableHeads from '../../data/tableHeads';
-import { updateChamada } from '../../functions/updateChamada';
+import { countStatusChamada } from '../../functions/countStatusChamadas';
 import { useDialogStatusData } from '../../hooks/useDialogStatusData';
 import Chamada from '../../interfaces/Chamada';
+import ChamadaCounter from '../../interfaces/ChamadaCounter';
+import { updateChamadaFromAPI } from '../../services/updateChamada';
 import { cancelIcon, checkIcon, editIcon } from '../icons';
 import SelectChamada from './components/SelectChamada';
 import TableData from './components/TableData';
 
 interface TableProps {
   chamadas: Chamada[];
+  setChamadasCounter: (value: ChamadaCounter) => void;
 }
 
-const Table: React.FC<TableProps> = ({ chamadas }) => {
+const Table: React.FC<TableProps> = ({ chamadas, setChamadasCounter }) => {
   const [allowEdit, setAllowEdit] = React.useState(false);
   const [chosedId, setChosedId] = React.useState<number>(null);
   const [estado, setEstado] = React.useState<string>(null);
@@ -47,20 +50,27 @@ const Table: React.FC<TableProps> = ({ chamadas }) => {
                   <TableData>
                     <div className="iconContainer">
                       <span
-                        className="icon greenIcon scaleItem"
+                        className="tableIcon greenIcon scaleItem"
                         title="Confirmar Operação"
-                        onClick={() => {
-                          updateChamada(chamada.id, chamada.estado).then(
-                            (res) => setStatusUpdate(res.status)
-                          );
+                        onClick={async () => {
+                          await updateChamadaFromAPI(
+                            chamada.id,
+                            chamada.estado
+                          ).then((res) => {
+                            setStatusUpdate(res.status);
+                            if (res.status === 200) {
+                              chamada.estado = estado;
+                              setChamadasCounter(countStatusChamada(chamadas));
+                            }
+                            setChosedId(null);
+                          });
                           setAllowEdit(false);
-                          chamada.estado = estado;
                         }}
                       >
                         {checkIcon}
                       </span>
                       <span
-                        className="icon redIcon scaleItem"
+                        className="tableIcon redIcon scaleItem"
                         title="Cancelar Operação"
                         onClick={() => {
                           setAllowEdit(false);
@@ -76,7 +86,7 @@ const Table: React.FC<TableProps> = ({ chamadas }) => {
                   <TableData>{chamada.estado}</TableData>
                   <TableData>
                     <span
-                      className="icon scaleItem"
+                      className="tableIcon scaleItem"
                       title="Editar Estado"
                       onClick={() => {
                         setAllowEdit(true);

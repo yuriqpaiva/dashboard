@@ -24,7 +24,7 @@ const DialogStatusData: React.FC<DialogStatusDataProps> = ({ children }) => {
 
   let clearTimeout: boolean;
 
-  function showDialogStatusUpdate() {
+  const showDialogStatusUpdate = () => {
     if (!clearTimeout) {
       clearTimeout = true;
       setTimeout(() => {
@@ -48,7 +48,7 @@ const DialogStatusData: React.FC<DialogStatusDataProps> = ({ children }) => {
     } else {
       return;
     }
-  }
+  };
 
   return (
     <DialogStatusContext.Provider

@@ -8,7 +8,7 @@ export const defaultTheme: DefaultTheme = {
     white: '#FFFF',
     blue: '#2083BC',
     green: '#1B772E',
-    yellow: '#F7F7A6',
+    yellow: '#FEF08A',
     red: '#CC0000',
     gray: '#464646',
     softGray: '#F2F2F2',

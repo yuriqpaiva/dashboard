@@ -30,11 +30,18 @@ export default styled.div`
   }
 
   .counter {
-    background-color: ${(props) => props.theme.palette.yellow};
+    display: flex;
+    align-items: center;
+    background-color: ${(props) => props.theme.palette.softGray};
     padding: 4px;
     border-radius: ${(props) => props.theme.borderRadius};
     .counterText {
       margin-left: 10px;
+    }
+    .counterImage {
+      margin-left: ${(props) => props.theme.distance.small};
+      width: 24px;
+      height: 24px;
     }
   }
 
@@ -80,7 +87,12 @@ export default styled.div`
       width: 90%;
       padding: 5px;
       margin-top: 16px;
-      font-size: 15px;
+      font-size: 16px;
+      border: 2px dashed ${(props) => props.theme.palette.blue};
+      border-radius: ${(props) => props.theme.borderRadius};
+      :hover {
+        cursor: pointer;
+      }
     }
 
     .iconContainer {
@@ -88,8 +100,7 @@ export default styled.div`
       gap: ${(props) => props.theme.distance.small};
     }
 
-    .icon {
-      display: flex;
+    .tableIcon {
       width: 32px;
       height: 32px;
       color: ${(props) => props.theme.palette.green};
@@ -138,7 +149,6 @@ export default styled.div`
       box-shadow: ${(props) => props.theme.shadow};
     }
     .statusIcon {
-      display: flex;
       width: 36px;
       height: 36px;
       margin-right: ${(props) => props.theme.distance.small};

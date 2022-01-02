@@ -34,6 +34,11 @@ const Counter: React.FC<CounterProps> = ({ updateChamadas }) => {
 
   return (
     <div className="counter">
+      <img
+        src="./reloadCounter.gif"
+        alt="spinningIconReload"
+        className="counterImage"
+      />
       <p className="counterText">
         Atualizando dados em <strong>{counterNumber}</strong> segundos
       </p>
