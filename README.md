@@ -2,7 +2,7 @@
 
 Dashboard application for Vero Tecnologia using React (create react app) with typescript and styled components.
 
-<img src='./public/demo.gif' style="width:500px;"/>
+<img src='./public/app.gif' />
 
 ## How to install dependencies?
 
