@@ -1,8 +1,8 @@
 # dashboard
 
-Dashboard application for Vero Tecnologia using React (create react app) and styled components.
+Dashboard application for Vero Tecnologia using React (create react app) with typescript and styled components.
 
-<!-- <img src='./assets/prints/screen.png' style="width:200px;"/> -->
+<img src='./public/demo.gif' style="width:500px;"/>
 
 ## How to install dependencies?
 
@@ -21,6 +21,8 @@ npm install
 ```
 
 ## How to run?
+
+### On project's folder:
 
 - yarn
 
